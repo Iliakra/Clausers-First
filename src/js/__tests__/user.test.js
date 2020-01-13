@@ -1,16 +1,16 @@
-import { loadUser } from '../user';
-import { httpGet } from '../http';
+import findBy from '../app';
 
-jest.mock('../http');
+let arr = [
+  {name: 'маг', type: 'character', description: 'Персонаж, обладающий магическими способностями'},
+  {name: 'заклинание', type: 'attack', description: 'Атака магическим заклинанием'},
+  {name: 'урон', type: 'help', description: 'Страница описания элемента интерфейса'},
+]
 
-beforeEach(() => {
-  jest.resetAllMocks();
-});
-
-test('should call loadUser once', () => {
-  httpGet.mockReturnValue(JSON.stringify({}));
-
-  const response = loadUser(1);
-  expect(response).toEqual({});
-  expect(httpGet).toBeCalledWith('http://server:8080/users/1');
+test('should return object by name and value', () => {
+  let finder = findBy('name', 'урон');
+  let results = arr.filter(finder);
+  const received = results;
+  const expected = [{name: 'урон', type: 'help', description: 'Страница описания элемента интерфейса'}];
+  expect(received).toEqual(expected);
+  
 });
