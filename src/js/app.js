@@ -1,3 +1,3 @@
-export default function findBy(name, value) {
-  return (item) => item.name === value;
+export default function findBy(prop, value) {
+  return (item) => item[prop] === value;
 }
